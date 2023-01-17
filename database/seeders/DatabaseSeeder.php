@@ -21,7 +21,7 @@ class DatabaseSeeder extends Seeder
         //     'email' => 'test@example.com',
         // ]);
 
-        \App\Models\Listing::factory(6)->create();
+        \App\Models\Listing::factory(10)->create();
 
         // \App\Models\Listing::create([
         //     'title' => 'Laravel Senior Developer',
