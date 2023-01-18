@@ -1,9 +1,10 @@
 <?php
 
-use App\Http\Controllers\ListingController;
-// use App\Models\Listing;
-// use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Models\Listing;
+use Illuminate\Http\Request;
+use App\Http\Controllers\UserController;
+use App\Http\Controllers\ListingController;
 
 /*
 |--------------------------------------------------------------------------
@@ -49,25 +50,39 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [ListingController::class, 'index']);
 
 // Show Create form
-Route::get('/listings/create', [ListingController::class, 'create']);
+Route::get('/listings/create', [ListingController::class, 'create'])->middleware('auth');
 
 // store listing data
-Route::post('/listings', [ListingController::class, 'store']);
+Route::post('/listings', [ListingController::class, 'store'])->middleware('auth');
 
 // Show edit form
-Route::get('/listings/{listing}/edit', [ListingController::class, 'edit']);
+Route::get('/listings/{listing}/edit', [ListingController::class, 'edit'])->middleware('auth');
 
 // Update listing
-Route::put('/listings/{listing}', [ListingController::class, 'update']);
+Route::put('/listings/{listing}', [ListingController::class, 'update'])->middleware('auth');
 
 // Delete listing
-Route::delete('/listings/{listing}', [ListingController::class, 'destroy']);
+Route::delete('/listings/{listing}', [ListingController::class, 'destroy'])->middleware('auth');
 
 // Single Listing
 Route::get('/listings/{listing}', [ListingController::class, 'show']);
 
 // Show Register/Create User form
-Route::get('/register', [UserController::class, 'create']);
+Route::get('/register', [UserController::class, 'create'])->middleware('guest');
+
+// Store user data
+Route::post('/users', [UserController::class, 'store']);
+
+// Logout user
+Route::post('/logout', [UserController::class, 'logout'])->middleware('auth');
+
+// show login form
+Route::get('/login', [UserController::class, 'login'])->name('login')->middleware('guest');
+
+// login user
+Route::post('users/authenticate', [UserController::class, 'authenticate']);
+
+
 
 // Route::get('/hello', function () {
 //     return response('<h1>Hello</h1>', 200)

@@ -8,7 +8,6 @@ use Illuminate\Validation\Rule;
 
 class ListingController extends Controller
 {
-
     // show all listings
     public function index(Request $request)
     {
