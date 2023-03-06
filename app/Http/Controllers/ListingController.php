@@ -11,10 +11,7 @@ class ListingController extends Controller
     // show all listings
     public function index(Request $request)
     {
-        // dd($request->tag);
-
         return view('listings.index', [
-            // 'listings' => Listing::all()
             'listings' => Listing::latest()
                 ->filter(request(['tag', 'search']))
                 ->paginate(6)
@@ -38,9 +35,6 @@ class ListingController extends Controller
     // Store Listing data
     public function store(Request $request)
     {
-        // dd($request->all());
-        // dd($request->file());
-
         $formFields = $request->validate([
             'title' => 'required',
             'company' => ['required', Rule::unique('listings', 'company')],
@@ -55,6 +49,8 @@ class ListingController extends Controller
             $formFields['logo'] = $request->file('logo')->store('logos', 'public');
         }
 
+        $formFields['user_id'] = auth()->id();
+
         Listing::create($formFields);
 
         return redirect('/')->with('message', 'Listing created successfully');
@@ -63,8 +59,6 @@ class ListingController extends Controller
     // Show edit form
     public function edit(Listing $listing)
     {
-        // dd($listing->title);
-
         return view('listings.edit', [
             'listing' => $listing
         ]);
@@ -72,8 +66,6 @@ class ListingController extends Controller
 
     public function update(Request $request, Listing $listing)
     {
-        // dd($request->all());
-        // dd($request->file());
 
         $formFields = $request->validate([
             'title' => 'required',

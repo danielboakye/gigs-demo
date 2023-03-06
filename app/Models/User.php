@@ -46,4 +46,10 @@ class User extends Authenticatable
     protected $dates = [
         'deleted_at'
     ];
+
+    // Relationship with listings
+    public function listings()
+    {
+        return $this->hasMany(Listing::class, 'user_id');
+    }
 }

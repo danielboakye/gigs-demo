@@ -18,23 +18,8 @@ use App\Http\Controllers\ListingController;
 */
 
 
-// Route::get('/listings/{id}', function ($id) {
-//     return view('listing', [
-//         'listing' => Listing::find($id)
-//     ]);
-// });
 
-// Route::get('/listings/{id}', function ($id) {
-//     $listing = Listing::find($id);
 
-//     if ($listing) {
-//         return view('listing', [
-//             'listing' => $listing
-//         ]);
-//     } else {
-//         abort(404);
-//     }
-// });
 
 
 // common resource routes 
@@ -81,20 +66,3 @@ Route::get('/login', [UserController::class, 'login'])->name('login')->middlewar
 
 // login user
 Route::post('users/authenticate', [UserController::class, 'authenticate']);
-
-
-
-// Route::get('/hello', function () {
-//     return response('<h1>Hello</h1>', 200)
-//         ->header('Content-Type', 'text/plain');
-// });
-
-// Route::get('/posts/{id}', function ($id) {
-//     dd($id);
-//     ddd($id);
-//     return response('Post: ' . $id);
-// })->where('id', '[0-9]+');
-
-// Route::get('/search', function (Request $request) {
-//     return response($request->name . ' ' . $request->city);
-// });
